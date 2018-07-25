@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Module Ajax</title>
+    </head>
+    <body>
+
+        <script src="../src/HttpConfigurationStorage.js" charset="utf-8"></script>
+        <script src="../src/HttpRequest.js"></script>
+        <script>
+            var storage = new HttpConfigurationStorage();
+            storage.addConfiguration('banner', {name:'Banner x12'});
+            storage.addConfiguration('recomendations', {name: 'products'});
+            storage.addConfiguration('advertising', {name:'advertising'});
+            storage.addConfiguration('second-content', {name:'second-content'});
+
+            storage.deleteConfiguration('advertising');
+            console.log(storage.getConfiguration('banner'));
+            console.log(storage.getConfiguration('second-content'));
+
+            console.log(storage.getCount());
+            console.log(storage.getLastConfigurationHttpRequest());
+
+            console.log(storage.getConfiguration('advertising'));
+
+            httpRequest = new HttpRequest('GET', 'http://www.encodeuri.es');
+            httpRequest.addParam('source', 'java,c#');
+            httpRequest.addParam('page', 'languaje')
+            httpRequest.addFilter('register');
+            httpRequest.setAuthentication('Maxfaider', 'yhfldmvossye.ghut');
+
+            console.log(httpRequest.getURI());
+
+
+        </script>
+    </body>
+</html>
