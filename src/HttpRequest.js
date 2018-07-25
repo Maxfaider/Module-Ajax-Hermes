@@ -29,8 +29,8 @@ var HttpRequest = function(method, uri) {
     }
 
     return {
-        addCookie(newCookie) {
-            cookies.push(newCookie);
+        addCookie(nameCookie, valueCookie) {
+            cookies.push({nameCookie, valueCookie});
         },
         setAuthentication(username, password) {
             authentication =  `${username}:${password}`;

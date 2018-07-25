@@ -48,8 +48,8 @@ var HttpRequestConfiguration = function(method, uri) {
             observers.push(observer);
             return this;
         },
-        addCookie(cookie) {
-            httpRequest.addCookie(cookie);
+        addCookie(nameCookie, valueCookie) {
+            httpRequest.addCookie(nameCookie, valueCookie);
             return this;
         },
         execute() {
