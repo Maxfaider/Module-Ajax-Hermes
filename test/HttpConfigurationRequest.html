@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Module Ajax</title>
+    </head>
+    <body>
+
+        <script src="../src/HttpRequestConfiguration.js"></script>
+        <script src="../src/HttpRequest.js"></script>
+        <script>
+
+            var httpRequestConfiguration = new HttpRequestConfiguration('GET', 'https://www.encodeuri.es');
+            var url = httpRequestConfiguration
+                    .addParam('param1', 'value1')
+                    .addParam('param2', 'value2')
+                    .addParam('param3', 'value3')
+                    .addFilter('register')
+                    .setAuthentication('Maxfaider', 'hgytuopa.gjhitp.cxx')
+                    .getURI()
+
+            console.log(url);
+
+            httpRequestConfiguration.setEventRequest({
+                success(responseHttp) {
+                    return responseHttp;
+                },
+                error(errorMessage) {
+                    return errorMessage;
+                },
+                processingRequest(statusRequest) {
+
+                }
+            });
+
+            httpRequestConfiguration.execute();
+
+        </script>
+    </body>
+</html>

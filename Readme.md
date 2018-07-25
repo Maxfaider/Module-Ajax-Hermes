@@ -17,7 +17,7 @@
     >   Add Authentication
     >   https://username:password@example.com/index.php/access/
 
-##Develoment View
+## Develoment View
 
 ![Develoment-View](docs/img/Develoment-View.png)
 
