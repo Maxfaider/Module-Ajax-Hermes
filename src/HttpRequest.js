@@ -6,7 +6,7 @@ var HttpRequest = function(method, uri) {
     var cookies = [];
 
     function toStringParams() {
-        let total;
+        let total = '';
         params.forEach(
             (currentValue, currentIndex) => {
                 if (currentIndex === 0)

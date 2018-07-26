@@ -6,34 +6,35 @@
     </head>
     <body>
 
-        <script src="../src/HttpConfigurationStorage.js" charset="utf-8"></script>
-        <script src="../src/HttpRequest.js"></script>
+        <script src="../dist/hermes.min.js" charset="utf-8"></script>
         <script>
-            var storage = new HttpConfigurationStorage();
-            storage.addConfiguration('banner', {name:'Banner x12'});
-            storage.addConfiguration('recomendations', {name: 'products'});
-            storage.addConfiguration('advertising', {name:'advertising'});
-            storage.addConfiguration('second-content', {name:'second-content'});
+            var httpConfigurations = Hermes.newRequestAjax(
+                'banner',
+                METHOD.GET,
+                'https://www.encode.tl'
+            );
 
-            storage.deleteConfiguration('advertising');
-            console.log(storage.getConfiguration('banner'));
-            console.log(storage.getConfiguration('second-content'));
+            console.log(httpConfigurations);
 
-            console.log(storage.getCount());
-            console.log(storage.getLastConfigurationHttpRequest());
+            var uri = httpConfigurations
+                .addParam('page', 1)
+                .addFilter('find')
+                .getURI();
 
-            console.log(storage.getConfiguration('advertising'));
+            console.log(uri)
+            //other
+            var httpConfigurations = Hermes.newRequestAjax(
+                'inv',
+                METHOD.POST,
+                'https://www.amecodelabs.io',
+                'unique'
+            );
 
-            httpRequest = new HttpRequest('GET', 'http://www.encodeuri.es');
-            httpRequest.addParam('source', 'java,c#');
-            httpRequest.addParam('page', 'languaje')
-            httpRequest.addFilter('register');
-            httpRequest.setAuthentication('Maxfaider', 'yhfldmvossye.ghut');
+            console.log(httpConfigurations.getURI());
 
-            console.log(httpRequest.getParams());
-            console.log(httpRequest.getURI());
-
-
+            console.log(Hermes.getRequestPrevious('banner').getURI());
+            console.log(Hermes.getRequestPrevious().getURIReal());
+            console.log(Hermes.getRequestPrevious('inv'));
         </script>
     </body>
 </html>

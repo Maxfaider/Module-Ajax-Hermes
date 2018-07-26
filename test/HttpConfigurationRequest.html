@@ -11,8 +11,10 @@
         <script src="../src/HttpRequest.js"></script>
         <script>
 
-            var httpRequestConfiguration = new HttpRequestConfiguration('service','GET', 'http://localhost/testHermes/');
+            var httpRequestConfiguration = new HttpRequestConfiguration('service','POST', 'http://localhost/testHermes/');
             httpRequestConfiguration
+                .addFilters('register','user')
+                .addParam('bar', 'foo')
                 .setDurationMax(5)
                 .setEventRequest({
                     init() {

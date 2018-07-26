@@ -12,12 +12,14 @@ var HttpConfigurationStorage = function() {
             configurationsNumber++;
             lastHttpConfiguration = {index: index, content: configurationHttpRequest};
             httpConfigurations.push(lastHttpConfiguration);
-            return lastHttpConfiguration;
+            return lastHttpConfiguration.content;
         },
         getConfiguration(index) {
-            return httpConfigurations.find(
-                configuration => configuration.index == index
-            );
+            var configurationHttpRequest = httpConfigurations
+                                                .find(configuration => configuration.index == index);
+            if(configurationHttpRequest == null)
+                return configurationHttpRequest;
+            return configurationHttpRequest.content;
         },
         deleteConfiguration(index) {
             httpConfigurations = httpConfigurations.filter(
@@ -29,7 +31,7 @@ var HttpConfigurationStorage = function() {
             return configurationsNumber;
         },
         getLastConfigurationHttpRequest() {
-            return lastHttpConfiguration;
+            return lastHttpConfiguration.content;
         }
     };
 }

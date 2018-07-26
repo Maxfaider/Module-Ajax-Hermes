@@ -1,0 +1,26 @@
+{
+  "name": "module-ajax-hermes",
+  "version": "1.0.0",
+  "description": "Simple Ajax module to send HTTP queries, which simplifies and allows you to develop your projects, without having to worry about low level processes.",
+  "main": "dist/hermes.min.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maxfaider/Module-Ajax-Hermes.git"
+  },
+  "keywords": [
+    "AJAX",
+    "xmlhttprequest",
+    "Request",
+    "http"
+  ],
+  "author": "Alan M.E",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Maxfaider/Module-Ajax-Hermes/issues"
+  },
+  "homepage": "https://github.com/Maxfaider/Module-Ajax-Hermes"
+}
