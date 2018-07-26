@@ -2,19 +2,20 @@
 *  HttpRequestConfiguration
 *
 */
-var HttpRequestConfiguration = function(method, uri) {
+var HttpRequestConfiguration = function(name, method, uri) {
     var httpRequest = new HttpRequest(method, uri);
     var eventRequest = {};
     var observers = [];
-    var durationMax;
+    var durationMax = 0;
 
     return {
         setAuthentication(username, password) {
             httpRequest.setAuthentication(username, password);
             return this;
         },
-        setDurMax(seconds) {
-            durationMax = seconds;
+        setDurationMax(seconds) {
+            durationMax = seconds*1000;
+            return this;
         },
         addParams(params = {}) {
             for (key in params)
@@ -35,10 +36,14 @@ var HttpRequestConfiguration = function(method, uri) {
             return this;
         },
         setEventRequest({
+            init: eventInit,
+            abort: eventAbort,
             success: eventSuccess,
             error: eventError,
             processingRequest: eventProcessingRequest
         }) {
+            eventRequest.init = eventInit;
+            eventRequest.abort = eventAbort;
             eventRequest.success = eventSuccess;
             eventRequest.error = eventError;
             eventRequest.processingRequest = eventProcessingRequest;
@@ -53,7 +58,11 @@ var HttpRequestConfiguration = function(method, uri) {
             return this;
         },
         execute() {
-            console.log(eventRequest.error(401) + ' ' + eventRequest.success(this.getURIReal()));
+            var ajaxHttpRequest = new AjaxHttpRequest(name, durationMax, true);
+            ajaxHttpRequest.setObservers(observers);
+            ajaxHttpRequest.setEventRequest(eventRequest);
+            ajaxHttpRequest.setHttpRequest(httpRequest);
+            ajaxHttpRequest.sendRequest();
         },
         getURI() {
             return httpRequest.getURI();

@@ -1,11 +1,23 @@
 var eventRequest = {
+    init() {
+
+    },
+    abort() {
+
+    },
     success(responseHttp) {
 
     },
-    error(errorMessage) {
+    error(errorMessage, errorCode) {
 
     },
-    processingRequest(statusRequest) {
+    processingRequest() {
 
     }
+};
+
+var responseHttp = {
+    responseText: '',
+    responseXML: '',
+    status: 500
 };

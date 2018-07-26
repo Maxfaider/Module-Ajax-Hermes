@@ -6,6 +6,5 @@ var Observer = {
 
 var InfoRequest = {
     completed: false,
-    ConfigurationHttpRequest: '',
     response: ''
 };

@@ -51,7 +51,7 @@ var HttpRequest = function(method, uri) {
             return headerHttp;
         },
         getParams() {
-            return params;
+            return toStringParams();
         },
         getURI() {
             let decorateUri = (method === 'GET') ?
@@ -66,6 +66,9 @@ var HttpRequest = function(method, uri) {
         },
         getURIReal() {
             return uri;
+        },
+        getMethod() {
+            return method;
         }
     };
 }
