@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Module Ajax</title>
+    </head>
+    <body>
+
+        <script src="../src/HttpRequest.js" charset="utf-8"></script>
+        <script>
+            var httpRequest = new HttpRequest('POST', 'http://localhost/testHermes');
+
+            httpRequest.addParam('param1', 'value1');
+            httpRequest.addParam('param2', 'value2');
+            httpRequest.addParam('param3', 'value3');
+
+            httpRequest.addCookie('PHPsession', '184937AHDOWN');
+            httpRequest.addCookie('Jsession', '184937ADHSNN');
+            httpRequest.addCookie('Pysession', '18493FGNDOE');
+
+            httpRequest.addFilter('products');
+            httpRequest.addFilter('laptop');
+            httpRequest.addFilter('lenovo');
+
+            httpRequest.addHeader('Accept', 'application/json');
+            httpRequest.addHeader('Accept-language', 'es-CO');
+
+            console.log('Cookie-user: ' + httpRequest.getCookies());
+            console.log('Filters: ' + httpRequest.getFilters());
+            console.log('Params: ' + httpRequest.getParams());
+
+            console.log('Header: ' + JSON.stringify(httpRequest.getHeader()));
+
+            console.log('URI: ' + httpRequest.getURI());
+
+        </script>
+    </body>
+</html>

@@ -6,7 +6,7 @@
     </head>
     <body>
 
-        <script src="../dist/hermes.min.js" charset="utf-8"></script>
+        <script src="../dist/hermes.js" charset="utf-8"></script>
         <script>
             var httpConfigurations = Hermes.newRequestAjax(
                 'banner',
@@ -14,23 +14,16 @@
                 'https://www.encode.tl'
             );
 
-            console.log(httpConfigurations);
+            console.log('banner: ' + httpConfigurations)
 
-            var uri = httpConfigurations
-                .addParam('page', 1)
-                .addFilter('find')
-                .getURI();
-
-            console.log(uri)
             //other
             var httpConfigurations = Hermes.newRequestAjax(
                 'inv',
                 METHOD.POST,
                 'https://www.amecodelabs.io',
-                'unique'
             );
 
-            console.log(httpConfigurations.getURI());
+            console.log('inv' + httpConfigurations);
 
             console.log(Hermes.getRequestPrevious('banner').getURI());
             console.log(Hermes.getRequestPrevious().getURIReal());

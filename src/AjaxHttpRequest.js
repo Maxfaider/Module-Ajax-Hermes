@@ -55,7 +55,7 @@ var AjaxHttpRequest = function(name, durationMax = 0, async) {
         transferBefore();
 
         ajaxRequest.open(HttpRequest.getMethod(), HttpRequest.getURI(), async);
-        if(HttpRequest.getMethod === 'POST')
+        if(HttpRequest.getMethod() === 'POST')
             ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         configureHeader();
@@ -69,6 +69,8 @@ var AjaxHttpRequest = function(name, durationMax = 0, async) {
         var header = HttpRequest.getHeader();
         for (key in header)
             ajaxRequest.setRequestHeader(key, header[key]);
+        //add Cookies-user
+        ajaxRequest.setRequestHeader('Cookie-user', HttpRequest.getCookies());
     }
 
     return {

@@ -29,6 +29,10 @@ var Hermes = (function() {
                 durationMax = seconds*1000;
                 return this;
             },
+            addHeader(header, value) {
+                httpRequest.addHeader(header, value);
+                return this;
+            },
             addParams(params = {}) {
                 for (key in params)
                     this.addParam(key, params[key]);
@@ -93,26 +97,39 @@ var Hermes = (function() {
         var cookies = [];
 
         function toStringParams() {
-            let total;
+            let concatParams = '';
             params.forEach(
                 (currentValue, currentIndex) => {
                     if (currentIndex === 0)
-                        total = `${currentValue.param}=${currentValue.value}`;
+                        concatParams = `${currentValue.param}=${currentValue.value}`;
                     else
-                        total += `&${currentValue.param}=${currentValue.value}`;
+                        concatParams += `&${currentValue.param}=${currentValue.value}`;
                 }
             );
-            return total;
+            return concatParams;
+        }
+
+        function tostringCookies() {
+            let concatCookies = '';
+            params.forEach(
+                (currentValue, currentIndex) => {
+                    if (currentIndex === 0)
+                        concatCookies = `${currentValue.param}=${currentValue.value}`;
+                    else
+                        concatCookies += `;${currentValue.param}=${currentValue.value}`;
+                }
+            );
+            return concatCookies;
         }
 
         function toStringFilters() {
-            let total = '';
+            let concatFilters = '/';
             filters.forEach(
                 (currentValue) => {
-                    total += `/${currentValue}`;
+                    concatFilters += `${currentValue}/`;
                 }
             )
-            return total;
+            return concatFilters;
         }
 
         return {
@@ -125,8 +142,8 @@ var Hermes = (function() {
             addParam(param, value) {
                 params.push({param, value});
             },
-            setHeader(headers = {}) {
-                headerHttp = headers;
+            addHeader(header, value) {
+                headerHttp[header] = value;
             },
             addFilter(newFilter) {
                 filters.push(newFilter);
@@ -151,6 +168,12 @@ var Hermes = (function() {
                 }
                 return decorateUri;
             },
+            getCookies() {
+                return tostringCookies();
+            },
+            getFilters() {
+                return toStringFilters();
+            },
             getURIReal() {
                 return uri;
             },
@@ -174,8 +197,8 @@ var Hermes = (function() {
             },
             getConfiguration(index) {
                 var configurationHttpRequest = httpConfigurations
-                                                    .find(configuration => configuration.index == index);
-                if(configurationHttpRequest == null)
+                    .find(configuration => configuration.index == index);
+                if(configurationHttpRequest == undefined)
                     return configurationHttpRequest;
                 return configurationHttpRequest.content;
             },
@@ -247,7 +270,7 @@ var Hermes = (function() {
             transferBefore();
 
             ajaxRequest.open(HttpRequest.getMethod(), HttpRequest.getURI(), async);
-            if(HttpRequest.getMethod === 'POST')
+            if(HttpRequest.getMethod() === 'POST')
                 ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
             configureHeader();
@@ -261,6 +284,8 @@ var Hermes = (function() {
             var header = HttpRequest.getHeader();
             for (key in header)
                 ajaxRequest.setRequestHeader(key, header[key]);
+            //add Cookies-user
+            ajaxRequest.setRequestHeader('Cookie-user', HttpRequest.getCookies());
         }
 
         return {
@@ -284,8 +309,8 @@ var Hermes = (function() {
     }
 
     return {
-        newRequestAjax(name, method, uri, flag='prototype') {
-            if(flag === 'prototype') {
+        newRequestAjax(name, method, uri, is_storage=true) {
+            if(is_storage === true) {
                 if(httpConfigurationStorage == null)
                     httpConfigurationStorage = new HttpConfigurationStorage()
 

@@ -16,8 +16,8 @@ var HttpConfigurationStorage = function() {
         },
         getConfiguration(index) {
             var configurationHttpRequest = httpConfigurations
-                                                .find(configuration => configuration.index == index);
-            if(configurationHttpRequest == null)
+                .find(configuration => configuration.index == index);
+            if(configurationHttpRequest == undefined)
                 return configurationHttpRequest;
             return configurationHttpRequest.content;
         },

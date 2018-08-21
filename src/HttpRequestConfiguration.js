@@ -17,6 +17,10 @@ var HttpRequestConfiguration = function(name, method, uri) {
             durationMax = seconds*1000;
             return this;
         },
+        addHeader(header, value) {
+            httpRequest.addHeader(header, value);
+            return this;
+        },
         addParams(params = {}) {
             for (key in params)
                 this.addParam(key, params[key]);

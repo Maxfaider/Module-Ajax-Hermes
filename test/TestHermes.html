@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Module Ajax</title>
+    </head>
+    <body>
+
+        <script src="../dist/hermes.min.js" charset="utf-8"></script>
+        <script>
+            var httpRequestConfiguration = Hermes.newRequestAjax(
+                'service',
+                METHOD.POST,
+                'http://localhost/testHermes'
+            );
+
+            httpRequestConfiguration
+                .addHeader('Accept', 'application/json')
+                .addHeader('Accept-language', 'es-CO')
+                .addCookie('preferences', 'javascript')
+                .addFilters('register')
+                .addParam('bar', 'foo')
+                .addParam('param2', 'value2')
+                .setDurationMax(5) //seconds
+                .setEventRequest({
+                    init() {
+                        console.log('init data...')
+                    },
+                    abort() {
+                        console.log('Transferencia a superado el tiempo establecido...');
+                    },
+                    success(responseHttp) {
+                        console.log(
+                            'Response: ' + responseHttp.responseText +
+                            '\nStatus: ' + responseHttp.status
+                        );
+                    },
+                    error(errorMessage, errorCode) {
+                        console.log('Error: ' + errorMessage + ' ' + errorCode);
+                    },
+                    processingRequest() {
+                        console.log('processing Request...');
+                    }
+                })
+                .addObserver({
+                    notify(nameRequest, infoRequest) {
+                        console.log('observer: ' + nameRequest + ' ' + infoRequest.completed);
+                    }
+                })
+                .execute();
+
+        </script>
+    </body>
+</html>

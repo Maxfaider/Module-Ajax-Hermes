@@ -6,26 +6,39 @@ var HttpRequest = function(method, uri) {
     var cookies = [];
 
     function toStringParams() {
-        let total = '';
+        let concatParams = '';
         params.forEach(
             (currentValue, currentIndex) => {
                 if (currentIndex === 0)
-                    total = `${currentValue.param}=${currentValue.value}`;
+                    concatParams = `${currentValue.param}=${currentValue.value}`;
                 else
-                    total += `&${currentValue.param}=${currentValue.value}`;
+                    concatParams += `&${currentValue.param}=${currentValue.value}`;
             }
         );
-        return total;
+        return concatParams;
+    }
+
+    function tostringCookies() {
+        let concatCookies = '';
+        params.forEach(
+            (currentValue, currentIndex) => {
+                if (currentIndex === 0)
+                    concatCookies = `${currentValue.param}=${currentValue.value}`;
+                else
+                    concatCookies += `;${currentValue.param}=${currentValue.value}`;
+            }
+        );
+        return concatCookies;
     }
 
     function toStringFilters() {
-        let total = '';
+        let concatFilters = '/';
         filters.forEach(
             (currentValue) => {
-                total += `/${currentValue}`;
+                concatFilters += `${currentValue}/`;
             }
         )
-        return total;
+        return concatFilters;
     }
 
     return {
@@ -38,8 +51,8 @@ var HttpRequest = function(method, uri) {
         addParam(param, value) {
             params.push({param, value});
         },
-        setHeader(headers = {}) {
-            headerHttp = headers;
+        addHeader(header, value) {
+            headerHttp[header] = value;
         },
         addFilter(newFilter) {
             filters.push(newFilter);
@@ -63,6 +76,12 @@ var HttpRequest = function(method, uri) {
                 return `${sepUri[1]}${authentication}@${sepUri[2]}`;
             }
             return decorateUri;
+        },
+        getCookies() {
+            return tostringCookies();
+        },
+        getFilters() {
+            return toStringFilters();
         },
         getURIReal() {
             return uri;

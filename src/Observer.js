@@ -1,5 +1,5 @@
 var Observer = {
-    notify(nameRequest, InfoRequest) {
+    notify(nameRequest, infoRequest) {
         //empty
     }
 };
