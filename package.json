@@ -1,7 +1,7 @@
 {
   "name": "module-ajax-hermes",
   "version": "1.0.0",
-  "description": "Simple Ajax module to send HTTP queries, which simplifies and allows you to develop your projects, without having to worry about low level processes.",
+  "description": "Hermes is a lightweight JavaScript library built on XMLHttpRequest to make AJAX calls.",
   "main": "dist/hermes.min.js",
   "directories": {
     "doc": "docs",

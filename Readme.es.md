@@ -6,26 +6,26 @@
     <img src="docs/img/hermes.jpg" alt="Hermes-image" />
 </p>
 
-Hermes is a lightweight JavaScript library built on XMLHttpRequest to make AJAX calls. It allows you to make HTTP requests from the browser and the server.
+Hermes es una librería ligera de JavaScript construida sobre XMLHttpRequest para realizar llamadas AJAX. Te permite realizar solicitudes HTTP desde el navegador y el servidor.
 
-## Features
+## Funciones
 
-- Send HTTP requests: POST, GET, HEAD, PUT and DELETE.
+- Envió de peticiones HTTP: POST, GET, HEAD, PUT y DELETE.
 
-- Control of HTTP requests:
-    -   Storage of sent requests.
-    -   Control of the duration of the request.
-    -   Allows the implementation of observers for HTTP requests.
-    -   Send Cookies.
+- Control de las solicitudes HTTP:
+    -   Almacén de solicitudes enviadas.
+    -   Manejo de la duración de la solicitud.
+    -   Permite la implementación de observadores para las solicitudes HTTP.
+    -   Envió de Cookies.
 
-- HTTP request configuration:
-    -   Add parameters to the HTTP request:
+- Configuración de solicitud HTTP:
+    -   Añadir parámetros a la solicitud HTTP:
     >   https://example.com/index.php?param1=value1&param2=value2&param3=value3
 
-    -   Add filters to the HTTP request:
+    -   Añadir filtros a la solicitud HTTP:
     >   https://example.com/index.php/filter1/filter2/filter3?param1=value1
 
-    -   Add basic authentication:
+    -   Añadir autenticación básica:
     >   https://username:password@example.com/index.php/access/
 
 ### Develoment View
@@ -37,10 +37,16 @@ Hermes is a lightweight JavaScript library built on XMLHttpRequest to make AJAX 
 ### Logical View
 ![Logical-View](docs/img/Logical-View.png)
 
-### How to use
+## How To Use
 
 ```html
 <script src="js/hermes.min.js"></script>
+```
+
+### Example
+
+```js
+newRequestAjax(name, method, uri, is_storage=true)
 ```
 
 ```js
@@ -49,12 +55,14 @@ var httpRequestConfigurations = Hermes.newRequestAjax(
     METHOD.GET,
     'http://localhost/testHermes/'
 );
+```
 
+```js
 httpRequestConfiguration
     .addHeader('Accept', 'application/json')
     .addFilters('register','user')
     .addParam('bar', 'foo')
-    .setDurationMax(5) //seconds
+    .setDurationMax(5) //segundos
     .setEventRequest({
         init() {
             console.log('init data...')
