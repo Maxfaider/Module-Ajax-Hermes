@@ -1,6 +1,6 @@
 {
   "name": "module-ajax-hermes",
-  "version": "1.0.0",
+  "version": "v1.1.0",
   "description": "Hermes is a lightweight JavaScript library built on XMLHttpRequest to make AJAX calls.",
   "main": "dist/hermes.min.js",
   "directories": {

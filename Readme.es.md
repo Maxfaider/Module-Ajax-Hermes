@@ -39,8 +39,15 @@ Hermes es una librería ligera de JavaScript construida sobre XMLHttpRequest par
 
 ## How To Use
 
+### Manual installation
+
 ```html
 <script src="js/hermes.min.js"></script>
+```
+### NPM
+
+```console
+npm i module-ajax-hermes
 ```
 
 ### Example

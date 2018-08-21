@@ -37,10 +37,17 @@ Hermes is a lightweight JavaScript library built on XMLHttpRequest to make AJAX 
 ### Logical View
 ![Logical-View](docs/img/Logical-View.png)
 
-### How to use
+## How To Use
+
+### Manual installation
 
 ```html
 <script src="js/hermes.min.js"></script>
+```
+### NPM
+
+```console
+npm i module-ajax-hermes
 ```
 
 ```js
